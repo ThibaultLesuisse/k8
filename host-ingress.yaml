@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: host-ingress
+spec:
+  defaultBackend:
+    service:
+      name: lion
+      port:
+        number: 80
+  rules:
+  - host: lion.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: lion
+            port:
+              number: 8080

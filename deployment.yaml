@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lion-deployment
+  labels:
+    run: lion
+spec:
+  selector:
+    matchLabels:
+      run: lion
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: lion
+    spec:
+      containers:
+      - name: lion
+        image: thibaultlesuisse/dotnet-default-api:latest
+        env:
+          - name: Environment
+            value: Production
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512M
+          requests:
+            cpu: 200m
